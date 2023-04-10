@@ -19,4 +19,20 @@ export class ListarUsuariosComponent implements OnInit {
     );
   }
 
+  AgregarUsuario(){
+
+  }
+
+  ObtenerInformacionUsuario(id:number){
+    console.log(id);
+  }
+
+  ActualizarUsuario(id:number){
+    console.log(id);
+  }
+
+  EliminarUsuario(id:number){
+    console.log(id);
+  }
+
 }
