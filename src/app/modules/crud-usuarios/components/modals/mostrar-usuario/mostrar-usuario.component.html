@@ -1,27 +1,32 @@
 <h1>Datos del Usuario</h1>
 <br>
-<table>
-    <tr>
-      <td><label class="label-text">Id:</label></td>
-      <td><label class="label-info">{{id}}</label></td>
-    </tr>
-    <tr>
-      <td><label class="label-text">Nombre:</label></td>
-      <td><label class="label-info">{{name}}</label></td>
-    </tr>
-    <tr>
-      <td><label class="label-text">Correo Electronico:</label></td>
-      <td><label class="label-info">{{email}}</label></td>
-    </tr>
-    <tr>
-      <td><label class="label-text">Genero:</label></td>
-      <td><label class="label-info">{{gender}}</label></td>
-    </tr>
-    <tr>
-      <td><label class="label-text">Estado:</label></td>
-      <td><label class="label-info">{{status}}</label></td>
-    </tr>
-  </table>
-<br>
-<br>
-<button type="button" class="btn btn-outline-danger" (click)="Close()">Cerrar</button>
+<ng-container *ngIf="id > 0">
+  <table>
+      <tr>
+        <td><label class="label-text">Id:</label></td>
+        <td><label class="label-info">{{id}}</label></td>
+      </tr>
+      <tr>
+        <td><label class="label-text">Nombre:</label></td>
+        <td><label class="label-info">{{name}}</label></td>
+      </tr>
+      <tr>
+        <td><label class="label-text">Correo Electronico:</label></td>
+        <td><label class="label-info">{{email}}</label></td>
+      </tr>
+      <tr>
+        <td><label class="label-text">Genero:</label></td>
+        <td><label class="label-info">{{gender}}</label></td>
+      </tr>
+      <tr>
+        <td><label class="label-text">Estado:</label></td>
+        <td><label class="label-info">{{status}}</label></td>
+      </tr>
+    </table>
+  <br>
+  <br>
+  <button type="button" class="btn btn-outline-danger" (click)="Close()">Cerrar</button>
+</ng-container>
+<ng-container *ngIf="id == -1">
+  <h3>No hay datos para mostrar con ese Id</h3>
+</ng-container>

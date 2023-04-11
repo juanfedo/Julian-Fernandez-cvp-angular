@@ -48,7 +48,7 @@ export class EditarUsuarioComponent implements OnInit {
       err.error.forEach(element => {
         mensaje += element.field + ' ' + element.message + '\n';
       });
-      alert("Error1: " + mensaje)
+      alert("Error: " + mensaje)
     });
   }
 

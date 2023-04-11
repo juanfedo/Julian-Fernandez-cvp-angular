@@ -41,12 +41,13 @@ export class NuevoUsuarioComponent implements OnInit {
         alert("Usuario creado exitosamente con el ID: " + data.id);
         this.modalDialog.close(true);
       }
-    }, err => {
+    }, 
+      err => {
       let mensaje = '\n';
       err.error.forEach(element => {
         mensaje += element.field + ' ' + element.message + '\n';
       });
-      alert("Error1: " + mensaje)
+      alert("Error: " + mensaje)
     }
     );
   }

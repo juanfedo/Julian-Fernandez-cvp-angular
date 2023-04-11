@@ -1,3 +1,9 @@
-table .btn{
+.btn{
     margin: 4px;
   }
+
+.align-controls{
+  display:flex; 
+  justify-content:space-between; 
+  align-items:center;
+}

@@ -16,9 +16,9 @@ export class MostrarUsuarioComponent implements OnInit {
   gender?: string;
   status?: string;
 
-  constructor(public dialogRef: MatDialogRef<MostrarUsuarioComponent>, @Inject(MAT_DIALOG_DATA) public usuarioId: number, private servicioGoRest: GorestApiService) { 
+  constructor(private dialogRef: MatDialogRef<MostrarUsuarioComponent>, @Inject(MAT_DIALOG_DATA) private usuarioId: number, private servicioGoRest: GorestApiService) { 
   }
-
+  
   ngOnInit(): void {
     this.servicioGoRest.ObtenerUsuario(this.usuarioId).subscribe(
       data => {
@@ -27,8 +27,11 @@ export class MostrarUsuarioComponent implements OnInit {
         this.email = data.email;
         this.gender = data.gender;
         this.status = data.status;
+      }, 
+      err => {
+        this.id = -1;
       }
-    );
+    );    
   }
 
   Close() {

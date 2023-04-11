@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { NuevoUsuarioComponent } from '../modals/nuevo-usuario/nuevo-usuario.component';
 import { MostrarUsuarioComponent } from '../modals/mostrar-usuario/mostrar-usuario.component';
 import { EditarUsuarioComponent } from '../modals/editar-usuario/editar-usuario.component';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-listar-usuarios',
@@ -12,6 +13,8 @@ import { EditarUsuarioComponent } from '../modals/editar-usuario/editar-usuario.
   styleUrls: ['./listar-usuarios.component.css']
 })
 export class ListarUsuariosComponent implements OnInit {
+
+  idUsuarioForm = new FormControl('');
 
   constructor(private servicioGoRest: GorestApiService, private modalDialog: MatDialog) 
   { }
@@ -65,10 +68,22 @@ export class ListarUsuariosComponent implements OnInit {
     if (confirm('¿Esta seguro que deseas borrar este usuario?')) {
       this.servicioGoRest.EliminarUsuario(id).subscribe(
         data => {
-          console.log(data);
+          alert('Usuario ' + id + ' eliminado con exito');
+          this.ObtenerUsuarios();
         }
       );
     } 
   }
 
+  BuscarUsuario(idUsuario: number) {
+    if (idUsuario){
+      this.dialogRef = this.modalDialog.open(MostrarUsuarioComponent, {
+        width: "auto",
+        data: idUsuario
+      });    
+    }
+    else{
+      alert('Debe ingresar un id');
+    }
+  }
 }
