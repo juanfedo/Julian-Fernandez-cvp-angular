@@ -9,6 +9,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditarUsuarioComponent } from './components/modals/editar-usuario/editar-usuario.component';
 import { MostrarUsuarioComponent } from './components/modals/mostrar-usuario/mostrar-usuario.component';
+import { FormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +25,9 @@ import { MostrarUsuarioComponent } from './components/modals/mostrar-usuario/mos
     HttpClientModule,
     MatDialogModule,
     MatButtonModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     GorestApiService

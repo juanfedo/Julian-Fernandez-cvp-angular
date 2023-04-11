@@ -1,1 +1,30 @@
-<p>editar-usuario works!</p>
+<h1>Modificar usuario</h1>
+<br>
+<form [formGroup]="Form" (ngSubmit)="onCrear()">
+    <table>
+        <tr>
+          <td><label class="label-text">Id:</label></td>
+          <td><input id="id" placeholder="" formControlName="id" required type="text" autocomplete="off"></td>
+        </tr>
+        <tr>
+          <td><label class="label-text">Nombre:</label></td>
+          <td><input id="name" placeholder="" formControlName="name" required type="text" autocomplete="off"></td>
+        </tr>
+        <tr>
+          <td><label class="label-text">Correo Electronico:</label></td>
+          <td><input id="email" placeholder="" formControlName="email" required type="email" autocomplete="off"></td>
+        </tr>
+        <tr>
+          <td><label class="label-text">Genero:</label></td>
+          <td><input id="gender" placeholder="" formControlName="gender" required type="text" autocomplete="off"></td>
+        </tr>
+        <tr>
+          <td><label class="label-text">Estado:</label></td>
+          <td><input id="status" placeholder="" formControlName="status" required type="text" autocomplete="off"></td>
+        </tr>
+      </table>
+      <div class="container">
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+      </div>      
+  </form>
+  

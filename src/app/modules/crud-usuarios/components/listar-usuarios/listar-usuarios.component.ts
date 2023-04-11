@@ -4,6 +4,7 @@ import { usuario } from '../../models/usuario-model';
 import { MatDialog } from '@angular/material/dialog';
 import { NuevoUsuarioComponent } from '../modals/nuevo-usuario/nuevo-usuario.component';
 import { MostrarUsuarioComponent } from '../modals/mostrar-usuario/mostrar-usuario.component';
+import { EditarUsuarioComponent } from '../modals/editar-usuario/editar-usuario.component';
 
 @Component({
   selector: 'app-listar-usuarios',
@@ -18,8 +19,11 @@ export class ListarUsuariosComponent implements OnInit {
   usuarios: usuario[] = [];
   dialogRef: any;
 
-  ngOnInit(): void {
-    console.debug();
+  ngOnInit(): void {    
+    this.ObtenerUsuarios();
+  }
+
+  ObtenerUsuarios(){
     this.servicioGoRest.ObtenerUsuarios().subscribe(
       data => this.usuarios = data
     );
@@ -44,8 +48,17 @@ export class ListarUsuariosComponent implements OnInit {
     });
   }
 
-  ActualizarUsuario(id:number){
-    console.log(id);
+  ActualizarUsuario(usuario:usuario){
+    this.dialogRef = this.modalDialog.open(EditarUsuarioComponent, {
+      width: "auto",
+      data: usuario
+    });
+
+    this.dialogRef.afterClosed().subscribe(result => {
+      if (result){        
+        this.ObtenerUsuarios();
+      }
+    });
   }
 
   EliminarUsuario(id:number){
