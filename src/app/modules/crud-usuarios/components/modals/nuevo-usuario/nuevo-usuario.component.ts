@@ -1,5 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { usuario } from '../../../models/usuario-model';
+import { GorestApiService } from '../../../services/gorest-api.service';
 
 @Component({
   selector: 'app-nuevo-usuario',
@@ -8,13 +11,47 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class NuevoUsuarioComponent implements OnInit {
 
-    constructor(public modalDialog: MatDialogRef<NuevoUsuarioComponent>, 
-    @Inject(MAT_DIALOG_DATA) public message: string) { }
+  Form: FormGroup;
+  usuarioModal: usuario;
+
+  constructor(private servicioGoRest: GorestApiService, private fb: FormBuilder, private modalDialog: MatDialogRef<NuevoUsuarioComponent>, 
+    @Inject(MAT_DIALOG_DATA) private usuario: usuario) {
+      this.Form = this.fb.group({
+        name: [''],
+        email: [''],
+        gender: [''],
+        status: ['']
+      })
+     }
 
   ngOnInit(): void {
   }
 
-  Salir(){
+  CrearNuevoUsuario() {
+    this.usuarioModal = {
+      name: this.Form.get('name').value,
+      email: this.Form.get('email').value,
+      gender: this.Form.get('gender').value,
+      status: this.Form.get('status').value,
+      id: null 
+    };
+
+    this.servicioGoRest.AgregarUsuario(this.usuarioModal).subscribe(data => {
+      if (data != null){
+        alert("Usuario creado exitosamente con el ID: " + data.id);
+        this.modalDialog.close(true);
+      }
+    }, err => {
+      let mensaje = '\n';
+      err.error.forEach(element => {
+        mensaje += element.field + ' ' + element.message + '\n';
+      });
+      alert("Error1: " + mensaje)
+    }
+    );
+  }
+
+  Close(){
     this.modalDialog.close();
   }
 

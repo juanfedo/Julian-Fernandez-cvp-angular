@@ -11,7 +11,8 @@ import { EditarUsuarioComponent } from './components/modals/editar-usuario/edita
 import { MostrarUsuarioComponent } from './components/modals/mostrar-usuario/mostrar-usuario.component';
 import { FormsModule} from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { AuthInterceptorService } from './Interceptor/auth-interceptor.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   providers: [
-    GorestApiService
+    GorestApiService,
+    {
+      provide: HTTP_INTERCEPTORS, 
+      useClass: AuthInterceptorService, 
+      multi: true
+    }
   ],
   entryComponents: [
     NuevoUsuarioComponent,

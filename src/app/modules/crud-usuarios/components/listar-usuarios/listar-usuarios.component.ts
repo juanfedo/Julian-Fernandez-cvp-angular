@@ -32,13 +32,13 @@ export class ListarUsuariosComponent implements OnInit {
   AgregarUsuario(){
     console.debug();
     this.dialogRef = this.modalDialog.open(NuevoUsuarioComponent, {
-      width: "900px"
+      width: "auto"
     });
-    this.dialogRef.afterClosed().subscribe(
-      res => {
-        console.log(res);
+    this.dialogRef.afterClosed().subscribe(result => {
+      if (result){
+        this.ObtenerUsuarios();
       }
-    );
+    });
   }
 
   ObtenerInformacionUsuario(usuario:usuario){
@@ -55,14 +55,20 @@ export class ListarUsuariosComponent implements OnInit {
     });
 
     this.dialogRef.afterClosed().subscribe(result => {
-      if (result){        
+      if (result){
         this.ObtenerUsuarios();
       }
     });
   }
 
   EliminarUsuario(id:number){
-    console.log(id);
+    if (confirm('¿Esta seguro que deseas borrar este usuario?')) {
+      this.servicioGoRest.EliminarUsuario(id).subscribe(
+        data => {
+          console.log(data);
+        }
+      );
+    } 
   }
 
 }

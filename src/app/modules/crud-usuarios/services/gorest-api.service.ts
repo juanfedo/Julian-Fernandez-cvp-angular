@@ -15,50 +15,23 @@ export class GorestApiService {
   constructor(private cliente:HttpClient) { }
 
   ObtenerUsuarios():Observable<usuario[]>{
-    return this.cliente.get<usuario[]>(this.baseUrl)    
-      .pipe(
-        catchError(this.handleError<usuario[]>('ObtenerUsuarios', [])
-        )
-      );
+    return this.cliente.get<usuario[]>(this.baseUrl);
   }    
   
   ObtenerUsuario(id:number):Observable<usuario>{
-    return this.cliente.get<usuario>(this.baseUrl + "/" + id)
-    .pipe(
-      catchError(this.handleError<usuario>('ObtenerUsuario')
-      )
-    );    
+    return this.cliente.get<usuario>(this.baseUrl + "/" + id);    
   }  
 
   ActualizarUsuario(usuario:usuario):Observable<usuario>{
-    return this.cliente.put<usuario>(this.baseUrl + "/" + usuario.id, usuario)
-    .pipe(
-      catchError(this.handleError<usuario>('ActualizarUsuario')
-      )
-    );
+    return this.cliente.put<usuario>(this.baseUrl + "/" + usuario.id, usuario);
   }  
 
   AgregarUsuario(usuario:usuario):Observable<usuario>{
-    return this.cliente.post<usuario>(this.baseUrl, usuario)
-    .pipe(
-      catchError(this.handleError<usuario>('ActualizarUsuario')
-      )
-    );    
+    return this.cliente.post<usuario>(this.baseUrl, usuario);
   } 
   
   EliminarUsuario(id:number):Observable<usuario>{
-    return this.cliente.delete<usuario>(this.baseUrl + "/" +id)
-    .pipe(
-      catchError(this.handleError<usuario>('ActualizarUsuario')
-      )
-    );
+    return this.cliente.delete<usuario>(this.baseUrl + "/" +id);
   }    
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error); 
-      return of(result as T);
-    };
-  }  
 
 }

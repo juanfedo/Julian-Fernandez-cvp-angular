@@ -12,6 +12,7 @@ import { GorestApiService } from '../../../services/gorest-api.service';
 export class EditarUsuarioComponent implements OnInit {
 
   Form: FormGroup;
+  usuarioModal: usuario;
 
   constructor(private servicioGoRest: GorestApiService, private fb: FormBuilder, private modalDialog: MatDialogRef<EditarUsuarioComponent>, 
     @Inject(MAT_DIALOG_DATA) private usuario: usuario) {
@@ -27,19 +28,31 @@ export class EditarUsuarioComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onCrear() {
-    this.usuario = {
-      name: this.Form.get('name').value != this.usuario.name ? this.Form.get('name').value : null,
-      email: this.Form.get('email').value != this.usuario.email ? this.Form.get('email').value : null,
-      gender: this.Form.get('gender').value != this.usuario.gender ? this.Form.get('gender').value : null,
-      status: this.Form.get('status').value != this.usuario.status ? this.Form.get('status').value : null,      
+  EditarUsuario() {
+    this.usuarioModal = {
+      name: this.Form.get('name').value,
+      email: this.Form.get('email').value,
+      gender: this.Form.get('gender').value,
+      status: this.Form.get('status').value, 
       id: this.usuario.id,
     };
 
-    this.servicioGoRest.ActualizarUsuario(this.usuario).subscribe(data => {
+    this.servicioGoRest.ActualizarUsuario(this.usuarioModal).subscribe(data => {
       if (data != null){
+        alert("Usuario actualizado con exito");
         this.modalDialog.close(true);
       }
+    }, 
+    err => {
+      let mensaje = '\n';
+      err.error.forEach(element => {
+        mensaje += element.field + ' ' + element.message + '\n';
+      });
+      alert("Error1: " + mensaje)
     });
+  }
+
+  Close(){
+    this.modalDialog.close();
   }
 }

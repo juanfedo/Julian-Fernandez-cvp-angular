@@ -1,4 +1,28 @@
-<div mat-dialog-content>{{message}}</div>
-<div mat-dialog-actions>
-    <button mat-button (click)="Salir">Salir</button>
-</div>
+<h1>Nuevo usuario</h1>
+<br>
+<form [formGroup]="Form">
+    <table>
+        <tr>
+          <td><label class="label-text">Nombre:</label></td>
+          <td><input id="name" placeholder="" formControlName="name" required type="text" autocomplete="off"></td>
+        </tr>
+        <tr>
+          <td><label class="label-text">Correo Electronico:</label></td>
+          <td><input id="email" placeholder="" formControlName="email" required type="email" autocomplete="off"></td>
+        </tr>
+        <tr>
+          <td><label class="label-text">Genero:</label></td>
+          <td><input id="gender" placeholder="" formControlName="gender" required type="text" autocomplete="off"></td>
+        </tr>
+        <tr>
+          <td><label class="label-text">Estado:</label></td>
+          <td><input id="status" placeholder="" formControlName="status" required type="text" autocomplete="off"></td>
+        </tr>
+      </table>
+      <div class="container">
+        <button type="button" class="btn btn-primary" (click)="CrearNuevoUsuario()">Agregar</button>
+        <button type="button" class="btn btn-outline-danger" (click)="Close()">Cerrar</button>
+      </div>
+  </form>
+ 
+  

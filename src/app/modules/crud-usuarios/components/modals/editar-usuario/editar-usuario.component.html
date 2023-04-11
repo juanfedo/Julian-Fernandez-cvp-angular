@@ -1,6 +1,6 @@
 <h1>Modificar usuario</h1>
 <br>
-<form [formGroup]="Form" (ngSubmit)="onCrear()">
+<form [formGroup]="Form">
     <table>
         <tr>
           <td><label class="label-text">Id:</label></td>
@@ -24,7 +24,8 @@
         </tr>
       </table>
       <div class="container">
-        <button type="submit" class="btn btn-primary">Actualizar</button>
-      </div>      
+        <button type="button" class="btn btn-primary" (click)="EditarUsuario()">Actualizar</button>
+        <button type="button" class="btn btn-outline-danger" (click)="Close()">Cerrar</button>
+      </div>
   </form>
   
