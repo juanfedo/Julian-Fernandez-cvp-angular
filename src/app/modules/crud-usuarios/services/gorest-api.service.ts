@@ -17,4 +17,8 @@ export class GorestApiService {
     return this.cliente.get<usuario[]>(this.baseUrl);
   }    
   
+  ObtenerUsuario(id:number):Observable<usuario>{
+    return this.cliente.get<usuario>(this.baseUrl + "/" + id);
+  }  
+
 }
